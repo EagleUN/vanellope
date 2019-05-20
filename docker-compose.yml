@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  postgres:
+    image: mdillon/postgis:10-alpine
+    container_name: usersMsPostgres
+    ports:
+      - '25432:5432'
+    environment:
+      - POSTGRES_USER=usersms
+      - POSTGRES_PASSWORD=yiuPh9eipiu2la9ie8gaifec
+      - POSTGRES_DB=exeggcute
+    volumes:
+      - 'postgres_data:/var/lib/postgresql'
+
+volumes:
+  postgres_data:

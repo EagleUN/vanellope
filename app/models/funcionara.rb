@@ -1,0 +1,2 @@
+class Funcionara < ApplicationRecord
+end

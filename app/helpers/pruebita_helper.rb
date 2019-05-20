@@ -1,0 +1,2 @@
+module PruebitaHelper
+end

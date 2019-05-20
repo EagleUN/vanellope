@@ -1,0 +1,2 @@
+class Pruebita < ApplicationRecord
+end
