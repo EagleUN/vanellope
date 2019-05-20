@@ -1,2 +1,0 @@
-class Funcionara < ApplicationRecord
-end

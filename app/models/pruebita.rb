@@ -1,2 +1,0 @@
-class Pruebita < ApplicationRecord
-end

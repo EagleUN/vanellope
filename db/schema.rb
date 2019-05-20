@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_042959) do
+ActiveRecord::Schema.define(version: 2019_05_20_095020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -107,13 +107,6 @@ ActiveRecord::Schema.define(version: 2019_05_20_042959) do
     t.index ["tlid", "statefp"], name: "idx_tiger_featnames_tlid_statefp"
   end
 
-  create_table "funcionaras", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "info"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "geocode_settings", primary_key: "name", id: :text, force: :cascade do |t|
     t.text "setting"
     t.text "unit"
@@ -196,12 +189,6 @@ ActiveRecord::Schema.define(version: 2019_05_20_042959) do
     t.index ["state"], name: "place_lookup_state_idx"
   end
 
-  create_table "pruebas", force: :cascade do |t|
-    t.string "info"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "secondary_unit_lookup", primary_key: "name", id: :string, limit: 20, force: :cascade do |t|
     t.string "abbrev", limit: 5
     t.index ["abbrev"], name: "secondary_unit_lookup_abbrev_idx"
@@ -239,11 +226,17 @@ ActiveRecord::Schema.define(version: 2019_05_20_042959) do
 #   Unknown type 'geometry' for column 'the_geom'
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.string "name"
-    t.string "email"
-    t.integer "mobile_number"
+    t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 # Could not dump table "zcta5" because of following StandardError
