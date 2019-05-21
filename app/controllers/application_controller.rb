@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
     	devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :last_name])
     	devise_parameter_sanitizer.permit(:account_update, keys: [:name, :last_name])
  	end
+
+ 	protect_from_forgery with: :null_session
+
 end
