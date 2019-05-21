@@ -1,27 +1,27 @@
-# README
+# Vanellope
 
-# vanellope
 microservice to log in and sign up
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Prerequisites**
+Before staring, install:
+*[Docker](https://docs.docker.com/install/)
 
-Things you may want to cover:
+*[Docker Compose](https://docs.docker.com/compose/install/)
 
-* Ruby version
+*[Ruby On Rails](https://guides.rubyonrails.org/v5.0/getting_started.html)
 
-* System dependencies
+**Install the microservise**
+After download the repositore you can run the next lines insade on the same folder of your the project:
 
-* Configuration
+For the deploy of Postgrest database:
+* ```docker-compose up -d```
 
-* Database creation
+For the deploy of Ruby on Rails microservise:
 
-* Database initialization
+* ```bundle install```
 
-* How to run the test suite
+* ```rake db:migrate```
 
-* Services (job queues, cache servers, search engines, etc.)
+For run the microservise with the database:
 
-* Deployment instructions
-
-* ...
+* ```rails s```
