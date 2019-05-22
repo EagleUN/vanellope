@@ -1,0 +1,203 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Vanellope
+  description: Microservice of sign up and log in deploy on Ruby on Rails + Postgres
+  license:
+    name: Software Architecture, 2019-I
+host: 127.0.0.1:3001
+basePath: /users/resources
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/create:
+    post:
+      summary: Creates a new user
+      operationId: createUser
+      parameters:
+        - name: user
+          in: body
+          required: true
+          description: User Object
+          schema:
+            $ref: '#/definitions/NewUser'
+      responses:
+        '200':
+          description: Created
+        '422':
+          description: Unprocessable Entity
+
+        '500':
+          description: Internal Server Error
+
+  /users:
+    get:
+      summary: Returns all Users
+      operationId: getAllusers
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/UsersList'
+        '406':
+          description: Not Acceptable (Invalid Params)
+
+        '500':
+          description: Internal Server Error
+
+  /users/{email}:
+    get:
+      summary: Returns a user with the given code
+      operationId: getUserByEmail
+      parameters:
+        - name: email
+          in: path
+          description: The userd with that email to be returned
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+    put:
+      summary: Updates a course with the given code
+      operationId: updateCourse
+      parameters:
+        - name: email
+          in: path
+          description: The code of the course to be updated
+          required: true
+          type: integer
+        - name: course
+          in: body
+          required: true
+          description: Course Object
+          schema:
+            $ref: '#/definitions/CourseInput'
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+    delete:
+      summary: Deletes a course with the given code
+      operationId: deleteCourse
+      parameters:
+        - name: email
+          in: path
+          description: The code of the course to be deleted
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '406':
+            description: Not Acceptable (Invalid Params)
+            schema:
+              $ref: '#/definitions/ErrorModel'
+        '500':
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+definitions:
+ #NewUser
+  NewUser:
+    type: object
+    properties:
+      user:
+        type: object
+        properties:
+          name:
+            type: string
+          last_name:
+            type: string
+          email:
+            type: string
+          password:
+            type: string
+          password_confirmation:
+            type: string
+            
+  # User
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      
+  UserInput:
+    type: object
+    properties:
+      name:
+        type: string
+      credits:
+        type: integer
+
+  UsersList:
+    type: object
+    required:
+      - total
+      - list
+    properties:
+      total:
+        type: number
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
+# Errors
+  ErrorModel:
+    type: object
+    properties:
+      name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: 'string'
+      password:
+        type: string
+      password_confirmation:
+        type: string
+        

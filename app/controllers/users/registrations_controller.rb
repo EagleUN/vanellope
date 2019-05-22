@@ -14,6 +14,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def create
+    @user = User.new(user_params)
+    # @user.password = params[:password]
+    # if @user.save
+    # render json: {status: 200, msg: 'User was created.'}
+    # end
+    if @user.save
+        render json: {msg: 'User was created.'} , status: :created
+    else
+        render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+   # Setting up strict parameters for when we add account creation.
+    def user_params
+        params.require(:user).permit(:name, :last_name, :email, :password, :password_confirmation)
+    end
   # GET /resource/edit
   # def edit
   #   super
@@ -24,6 +41,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def update
+    user = User.find(params[:id])
+    if user.update(user_params)
+      render json: {msg: 'User details have been updated.' },  status: 200
+    end
+  end
+
+  def show
+    user = User.where(email: params[:email]).take
+    if user!=nil
+      render json: { user: { name: user.name, last_name: user.last_name, email: user.email} }, status: :created
+    else
+      user.errors
+    end
+  end  
+
+  def show2
+    user = User.all
+    render json: { user: user.size() }, status: :created
+  end 
   # DELETE /resource
   # def destroy
   #   super
