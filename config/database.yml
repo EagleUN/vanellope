@@ -17,8 +17,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  port: 25432
+  host: vanellope-db
+  port: 5432
   username: usersms
   password: yiuPh9eipiu2la9ie8gaifec
   # For details on connection pooling, see Rails configuration guide
