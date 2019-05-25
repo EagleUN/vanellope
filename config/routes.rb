@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 	devise_scope :user do
 	  # sessions
 	  post   'users/login',  to: 'users/sessions#create'
+	  delete 'users/logout', to: 'users/sessions#destroy'
 	  #get    'login',  to: 'devise/sessions#new',     as: :new_user_session
 	  #post   'login',  to: 'devise/sessions#create',  as: :user_session
 	  #delete 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
@@ -16,7 +17,8 @@ Rails.application.routes.draw do
 	  post   '/user/create',  to: 'users/registrations#create'
 	  get   '/user',  to: 'users/registrations#show'
 	  get   '/users',  to: 'users/registrations#showAll'
-	  delete '/user',  to: 'users/registrations#destroyUser'
+	  patch  '/user',  to: 'users/registrations#update'
+	  delete '/user',  to: 'users/registrations#destroy'
 	  #get    '/register', to: 'devise/registrations#new',    as: :new_user_registration
 	  #get    '/account',  to: 'devise/registrations#edit',   as: :edit_user_registration
 	  #patch  '/account',  to: 'devise/registrations#update', as: :user_registration

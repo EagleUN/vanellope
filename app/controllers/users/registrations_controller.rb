@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  # GET /resource/edit
+  # PATCH /resource/user
   def update
     user = User.find(params[:id])
     if user.update(user_params)
@@ -51,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end 
   
   # DELETE /resource/user
-  def destroyUser
+  def destroy
     #currUser = current_user
     #if currUser!=nil
     user = User.find_by(id: params[:id])

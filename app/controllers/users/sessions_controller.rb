@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   #   notice
   # end
 
-  # POST /resource/sign_in
+  # POST /resource/users/login
   def create
     user = User.find_by(email: params[:email])
     if user!=nil
@@ -23,7 +23,7 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
-  # DELETE /resource/sign_out
+  # DELETE /resource/users/logout
   def destroy
     if current_user==nil
       render json: {msg: "exit successful"}, status: 200
