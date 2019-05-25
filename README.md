@@ -28,5 +28,6 @@ For stop the docker containers:
 * ```Ctrl + c```
 * ```docker-compose down```
 
-Read the docker-compose.yml for modification the start of the database
-For more information about methods you can see the api.yml
+Read the docker-compose.yml for modification the start of the database.
+
+For more information about methods you can see the api.yml.
