@@ -9,14 +9,28 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    user = User.find_by(email: params[:email])
+    if user!=nil
+      if user_signed_in?
+        user = user_session
+        render json: user, status: 200
+      else
+        render json: {msg: "email or password incorrect"}, status: 406
+      end
+    else
+      render json: {msg: "User no found"}, status: 404
+    end
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    if current_user==nil
+      render json: {msg: "exit successful"}, status: 200
+    else
+      render json: {}, status: 400
+    end
+  end
 
   # protected
 
