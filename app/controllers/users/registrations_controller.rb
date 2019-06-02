@@ -35,8 +35,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # GET /resource/user
+  # GET /resource/userId
   def show
+    user = User.find_by(id: params[:id])
+    if user!=nil
+      render json: {id: user.id, name: user.name, last_name: user.last_name, email: user.email}, status: 200
+    else
+      render json: {msg: 'The user does not exist.' }, status: 406
+    end
+  end
+
+  # GET /resource/userEmail
+  def show_user_by_email
     user = User.find_by(email: params[:email])
     if user!=nil
       render json: {id: user.id, name: user.name, last_name: user.last_name, email: user.email}, status: 200
@@ -46,7 +56,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end  
 
   # GET /resource/users
-  def showAll
+  def show_all
     user = User.all
     render json: { total: user.size(), list: user.select(:id, :name, :last_name, :email) }, status: 202
   end 
