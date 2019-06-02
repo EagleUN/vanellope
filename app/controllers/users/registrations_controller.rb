@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     user = User.new(user_params)
     if user.save
-        render json: {}, status: 201
+        render json: user, status: 201
     else
         render json: user.errors, status: 400
     end
@@ -21,7 +21,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PATCH /resource/user
   def update
-    user = User.find(params[:id])
+    #user = User.find(params[:id])
+    user = current_user
     if user.update(user_params)
       render json: {msg: 'User details have been updated.' },  status: 200
     else
@@ -38,7 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def show
     user = User.find_by(email: params[:email])
     if user!=nil
-      render json: { user: {id: user.id, name: user.name, last_name: user.last_name, email: user.email} }, status: 200
+      render json: {id: user.id, name: user.name, last_name: user.last_name, email: user.email}, status: 200
     else
       render json: {msg: 'The user does not exist.' }, status: 406
     end
@@ -47,7 +48,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/users
   def showAll
     user = User.all
-    render json: { total: user.size(), list: user.select(:name, :last_name, :email).as_json(:except => :id) }, status: 202
+    render json: { total: user.size(), list: user.select(:id, :name, :last_name, :email) }, status: 202
   end 
   
   # DELETE /resource/user
@@ -90,7 +91,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Setting up strict parameters for when we add account creation.
   def user_params
-    params.require(:user).permit(:name, :last_name, :email, :password, :password_confirmation)
+    params.permit(:name, :last_name, :email, :password, :password_confirmation)
   end
 
   # The path used after sign up.

@@ -1,27 +1,33 @@
 # Vanellope
 
-microservice to log in and sign up
+Microservice to log in and sign up
 
 **Prerequisites**
+
 Before staring, install:
+
 *[Docker](https://docs.docker.com/install/)
 
 *[Docker Compose](https://docs.docker.com/compose/install/)
 
-*[Ruby On Rails](https://guides.rubyonrails.org/v5.0/getting_started.html)
 
-**Install the microservise**
-After download the repositore you can run the next lines insade on the same folder of your the project:
+**Install the microservice and database**
+After download the repository you must to run the next lines(maybe you need root permissions) inside on the same folder of your the project for run it:
 
-For the deploy of Postgrest database:
-* ```docker-compose up -d```
+For build the database and microservice inside of respective docker containers:
+* ```docker-compose build```
 
-For the deploy of Ruby on Rails microservise:
+For the deploy the docker containers:
 
-* ```bundle install```
+* ```docker-compose up```
 
-* ```rake db:migrate```
+Vanellope will run into the localhost:3001
 
-For run the microservise with the database:
+For stop the docker containers:
 
-* ```rails s```
+* ```Ctrl + c```
+* ```docker-compose down```
+
+Read the docker-compose.yml for modification the start of the database.
+
+For more information about methods you can see the api.yml.

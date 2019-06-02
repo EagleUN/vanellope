@@ -6,19 +6,19 @@ Rails.application.routes.draw do
 
 	devise_scope :user do
 	  # sessions
-	  post   'users/login',  to: 'users/sessions#create'
-	  delete 'users/logout', to: 'users/sessions#destroy'
+	  post   '/log/user/in',  to: 'users/sessions#create'
+	  delete '/log/user/out', to: 'users/sessions#destroy'
 	  #get    'login',  to: 'devise/sessions#new',     as: :new_user_session
 	  #post   'login',  to: 'devise/sessions#create',  as: :user_session
 	  #delete 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
 	  # registrations
 	  #put    '/account',  to: 'devise/registrations#update'
 	  #delete '/account',  to: 'devise/registrations#destroy'
-	  post   '/user/create',  to: 'users/registrations#create'
-	  get   '/user',  to: 'users/registrations#show'
-	  get   '/users',  to: 'users/registrations#showAll'
-	  patch  '/user',  to: 'users/registrations#update'
-	  delete '/user',  to: 'users/registrations#destroy'
+	  post   '/signup/user/create',  to: 'users/registrations#create'
+	  get   '/signup/user',  to: 'users/registrations#show'
+	  get   '/signup/users',  to: 'users/registrations#showAll'
+	  patch  '/signup/user',  to: 'users/registrations#update'
+	  delete '/signup/user',  to: 'users/registrations#destroy'
 	  #get    '/register', to: 'devise/registrations#new',    as: :new_user_registration
 	  #get    '/account',  to: 'devise/registrations#edit',   as: :edit_user_registration
 	  #patch  '/account',  to: 'devise/registrations#update', as: :user_registration
