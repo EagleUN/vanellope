@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 	  post   '/signup/user/create',  to: 'users/registrations#create'
 	  get   '/signup/user_id',  to: 'users/registrations#show'
 	  get   '/signup/user_email',  to: 'users/registrations#show_user_by_email'
-	  get   '/signup/users',  to: 'users/registrations#showAll'
+	  get   '/signup/users',  to: 'users/registrations#show_all'
 	  patch  '/signup/user',  to: 'users/registrations#update'
 	  delete '/signup/user',  to: 'users/registrations#destroy'
 	  #get    '/register', to: 'devise/registrations#new',    as: :new_user_registration

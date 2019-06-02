@@ -11,7 +11,9 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/users/login
   def create
     user = User.where(email: params[:email])
-    
+    puts "myUSER"
+    puts user
+    puts "fue my user"
     if user!=nil
       if user_signed_in?
         user = user_session
