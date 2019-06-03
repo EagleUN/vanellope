@@ -10,14 +10,22 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/users/login
   def create
-    user = User.where(email: params[:email])
-    puts "myUSER"
-    puts user
-    puts "fue my user"
+    user = User.find_by(email: params[:email])
+    user2 = User.where(email: params[:email])
     if user!=nil
+      if user.valid_password?(params[:password])
+        sign_in(user)
+      end
       if user_signed_in?
         user = user_session
         render json: user, status: 200
+      else
+        render json: {msg: "Email or password incorrect"}, status: 406
+      end
+    elsif user2!=nil
+      if user_signed_in?
+        user2 = user_session
+        render json: user2, status: 200
       else
         render json: {msg: "Email or password incorrect"}, status: 406
       end
@@ -28,7 +36,8 @@ class Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/users/logout
   def destroy
-    if current_user==nil
+    Devise.sign_out_all_scopes ? sign_out : sign_out(current_user)
+    if !user_signed_in?
       render json: {msg: "Exit successful"}, status: 200
     else
       render json: {msg: "Bad process"}, status: 400

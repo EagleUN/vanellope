@@ -62,13 +62,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end 
   
   # DELETE /resource/user
-  def destroy
+  def destroy_user
     #currUser = current_user
     #if currUser!=nil
     user = User.find_by(id: params[:id])
-    
     # if user.id==currUser.id
-    if user.destroy(user.id)
+    if user.destroy()
       render json: {msg: 'The user was successfully deleted.' },  status: 202
     else
       render json: {msg: 'The user does not exist.' }, status: 406
