@@ -18,7 +18,7 @@ class Users::SessionsController < Devise::SessionsController
       end
       if user_signed_in?
         user = user_session
-        render json: user, status: 200
+        render json: {id: current_user.id, session: true}, status: 200
       else
         render json: {msg: "Email or password incorrect"}, status: 406
       end
