@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 	devise_scope :user do
 	  # sessions
 	  post   '/log/user/in',  to: 'users/sessions#create'
+	  #esto es solo para una entrega SE DEBE QUITAR DESPUES DEL 5 DE JUNIO DEL 2019
+	  get	 '/log/user',	  to: 'users/sessions#showU'
 	  delete '/log/user/out', to: 'users/sessions#destroy'
 	  #get    'login',  to: 'devise/sessions#new',     as: :new_user_session
 	  #post   'login',  to: 'devise/sessions#create',  as: :user_session
