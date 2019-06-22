@@ -35,6 +35,8 @@ paths:
       responses:
         '201':
           description: Created
+          schema:
+            $ref: '#/definitions/UserComplete'
         '406':
           description: Not Acceptable (Invalid Params)
         '500':
@@ -47,8 +49,8 @@ paths:
       summary: Returns all Users
       operationId: allUsers
       responses:
-        '200':
-          description: Ok
+        '202':
+          description: Accepted
           schema:
             $ref: '#/definitions/UsersList'
         '406':
@@ -56,19 +58,19 @@ paths:
         '500':
           description: Internal Server Error
 
-  /signup/user:
+  /signup/user_id:
     get:
       tags:
         - "signup"
       summary: Returns a user with the given id
-      operationId: userByEmail
+      operationId: userById
       parameters:
-        - name: email
+        - name: id
           in: body
-          description: The user with that email to be returned
+          description: The user with that id to be returned
           required: true
           schema:
-            $ref: '#/definitions/GetUser'
+            $ref: '#/definitions/GetUserId'
       responses:
         '200':
           description: Ok
@@ -79,7 +81,30 @@ paths:
         '500':
           description: Internal Server Error
 
+  /signup/user_email:
+    get:
+      tags:
+        - "signup"
+      summary: Returns a user with the given email
+      operationId: userByEmail
+      parameters:
+        - name: email
+          in: body
+          description: The user with that email to be returned
+          required: true
+          schema:
+            $ref: '#/definitions/GetUserEmail'
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/GetUser200'
+        '406':
+            description: Not Acceptable (Invalid Params)
+        '500':
+          description: Internal Server Error
 
+  /signup/user:
     patch:
       tags:
         - "signup"
@@ -94,7 +119,9 @@ paths:
             $ref: '#/definitions/UpdateUser'
       responses:
         '202':
-          description: Aceptable        
+          description: Aceptable
+          schema:
+            $ref: '#/definitions/UpdateUser'
         '406':
             description: Not Acceptable (Invalid Params)
         '403':
@@ -128,7 +155,7 @@ paths:
     post:
       tags:
         - "log"
-      summary: Creates a new user session
+      summary: Creates a new user session and returns of a token User
       operationId: createNewUserSession
       parameters:
         - name: userSession
@@ -138,12 +165,12 @@ paths:
           schema:
             $ref: '#/definitions/LogInUser'
       responses:
-        '200':
-          description: Ok
-        '406':
-          description: Not Acceptable (Invalid Params)
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/TokenUser'
         '404':
-          description: Not found
+          description: Not found (Invalid Params)
         '500':
           description: Internal Server Error
 
@@ -151,58 +178,96 @@ paths:
     get:
       tags:
         - "log"
-      summary: Returns of a token User
-      operationId: tokenUser
+      summary: Returns if a user has login
+      operationId: authUser
       responses:
-        '200':
-          description: Ok
-          schema:
-            $ref: '#/definitions/TokenUser'
-        '406':
-          description: Not Acceptable (Invalid Params)
+        '202':
+          description: Accepted
+        '401':
+          description: Unauthorized
         '500':
           description: Internal Server Error
 
-  /log/user/out:
-    delete:
+  /log/user/edit:
+    patch:
       tags:
         - "log"
-      summary: Log out of a user session
-      operationId: deleteUserSession
+      summary: Updates the current user
+      operationId: updateCurrentUser
+      parameters:
+        - name: user
+          in: body
+          description: Updates user fields of the current user
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateUser'
       responses:
-        '200':
-          description: Ok
-        '400':
-          description: Bad Request
+        '202':
+          description: Aceptable
+          schema:
+            $ref: '#/definitions/UpdateUser'
+        '406':
+            description: Not Acceptable (Invalid Params)
+        '403':
+          description: Forbidden
         '500':
           description: Internal Server Error
+
 
 definitions:
   #NewUser
   NewUser:
     type: object
     properties:
-      user:
-        type: object
-        properties:
-          name:
-            type: string
-          last_name:
-            type: string
-          email:
-            type: string
-          password:
-            type: string
-          password_confirmation:
-            type: string
+      name:
+        type: string
+      last_name:
+        type: string
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      password_confirmation:
+        type: string
+        
+  #UserComplete
+  UserComplete:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      username:
+        type: string
+      role:
+        type: string
+      created_at: 
+        type: string
+      updated_at:
+        type: string
+      last_login:
+        type: string
 
-  #GetUser
-  GetUser:
+  #GetUserId
+  GetUserId:
+    type: object
+    properties:
+      id:
+        type: string
+
+  #GetUserEmail
+  GetUserEmail:
     type: object
     properties:
       email:
         type: string
-
 
   #IdUser
   IdUser:
@@ -215,29 +280,34 @@ definitions:
   UpdateUser:
     type: object
     properties:
-      user:
-        type: object
-        properties:
-          name:
-            type: string
-          last_name:
-            type: string
-          email:
-            type: string
-          password:
-            type: string
-          password_confirmation:
-            type: string
-          current_password:
-            type: string
+      id:
+        type: string
+      name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+      username:
+        type: string
+      password:
+        type: string
+      password_confirmation:
+        type: string
+      current_password:
+        type: string
 
   # User
   User:
     type: object
     properties:
+      id:
+        type: string
       name:
         type: string
       last_name:
+        type: string
+      username:
         type: string
       email:
         type: string
@@ -252,6 +322,8 @@ definitions:
         type: string
       last_name:
         type: string
+      username:
+        type: string
       email:
         type: string
 
@@ -259,7 +331,7 @@ definitions:
   TokenUser:
     type: object
     properties:
-      token:
+      jwt:
         type: string
 
   #UsersList
@@ -280,13 +352,10 @@ definitions:
   LogInUser:
     type: object
     properties:
-      userSession:
-        type: object
-        properties:
-          email:
-            type: string
-          password:
-            type: string
+      email:
+        type: string
+      password:
+        type: string
 
 
 # Errors
