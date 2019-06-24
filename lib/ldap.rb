@@ -1,6 +1,6 @@
 class Ldap
-    def initialize(username, password)
-      @username = username
+    def initialize(email, password)
+      @email = email
       @password = password
     end
   
@@ -24,7 +24,7 @@ class Ldap
         :auth => {
           :method => :simple,
           :dn => "cn=#{username}+,ou=eagle,dc=arqsoft,dc=unal,dc=edu,dc=co",
-          :password => password
+          :password => @password
         }
       )
       return ldap.bind
@@ -45,5 +45,8 @@ class Ldap
       end
     end
 
+    def username
+      "#{@email.split("@").first}"
+    end
 end
   
