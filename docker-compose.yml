@@ -16,9 +16,9 @@ services:
   vanellope-ms:
     build: .
     #normal execution without modification about database
-    command: bash -c "gem uninstall bundler && gem update bundler && bundler update --bundler && bundler install && rails db:migrate && rails s -p 3001 -b '0.0.0.0'"
+    #command: bash -c "gem uninstall bundler && gem update bundler && bundler update --bundler && bundler install && rails db:migrate && rails s -p 3001 -b '0.0.0.0'"
     #normal execution with restart database without seeds
-    #command: bash -c "gem uninstall bundler && gem update bundler && bundler update --bundler && bundler install && rails db:drop && rails db:create && rails db:setup && rails db:migrate && rails s -p 3001 -b '0.0.0.0'"
+    command: bash -c "gem uninstall bundler && gem update bundler && bundler update --bundler && bundler install && rails db:drop && rails db:create && rails db:setup && rails db:migrate && rails s -p 3001 -b '0.0.0.0'"
     #normal execution with restart database with seeds
     #command: bash -c "gem uninstall bundler && gem update bundler && bundler update --bundler && bundler install && rails db:drop && rails db:create && rails db:setup && rails db:migrate && rails db:seed && rails s -p 3001 -b '0.0.0.0'"
     ports:

@@ -1,7 +1,9 @@
+require 'net/ldap'
 class Ldap
     def initialize(email, password)
       @email = email
       @password = password
+      puts("email: " + email + " password: "+ password)
     end
   
     def connect
@@ -23,10 +25,11 @@ class Ldap
         :port => 389,
         :auth => {
           :method => :simple,
-          :dn => "cn=#{username}+,ou=eagle,dc=arqsoft,dc=unal,dc=edu,dc=co",
+          :dn => "cn=#{@email},ou=eagle,dc=arqsoft,dc=unal,dc=edu,dc=co",
           :password => @password
         }
       )
+      #puts("username: #{username}")
       return ldap.bind
     end
 
