@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 	get   	'/signup/user_id'		=> 'user#show_user_by_id'
 	get   	'/signup/user_email'  	=> 'user#show_user_by_email'
 	#log in
-	patch   '/log/user/edit'		=> 'user#current'
+	get   	'/log/user/edit'		=> 'user#current'
 	get    	'/log/user'				=> 'home#auth'
 	# Get log in token from Knock
 	post   	'/log/user/in'			=> 'user_token#create'
