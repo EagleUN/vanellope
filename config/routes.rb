@@ -19,8 +19,5 @@ Rails.application.routes.draw do
 	# Get log in token from Knock
 	post   	'/log/user/in'			=> 'user_token#create'
 	get    	'/users'				=> 'user#index'
-
-	#LDAP auth
-	post   '/auth'                  => 'ldap_auth#connect'
 end
     

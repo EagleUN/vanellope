@@ -9,6 +9,7 @@ class Ldap
     def connect
       ldap = Net::LDAP.new(
         :host => "eagleun-ldap",
+        #:host => "35.232.95.82",
         :port => 389,
         :auth => {
           :method => :simple,
@@ -22,6 +23,7 @@ class Ldap
     def connectUser
       ldap = Net::LDAP.new(
         :host => "eagleun-ldap",
+        #:host => "35.232.95.82",
         :port => 389,
         :auth => {
           :method => :simple,
@@ -29,7 +31,6 @@ class Ldap
           :password => @password
         }
       )
-      #puts("username: #{username}")
       return ldap.bind
     end
 
@@ -40,11 +41,15 @@ class Ldap
             if user!=nil
               if user.valid?(@password)
                 puts("User authentication success")
+                return 1
               else
                 puts("Error user authentication base datos")
+                return 2
               end
+            else
+                puts("Error user authentication base datos")
+                return 2
             end
-          return 1
         else
           puts("Error user authentication ldap")
           return 0
@@ -59,4 +64,3 @@ class Ldap
       "#{@email.split("@").first}"
     end
 end
-  
