@@ -21,6 +21,6 @@ Rails.application.routes.draw do
 	get    	'/users'				=> 'user#index'
 
 	#LDAP auth
-	get   '/auth'                  => 'ldap_auth#connect'
+	post   '/auth'                  => 'ldap_auth#connect'
 end
     

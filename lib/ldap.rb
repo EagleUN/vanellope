@@ -3,12 +3,12 @@ class Ldap
     def initialize(email, password)
       @email = email
       @password = password
-      puts("email: " + email + " password: "+ password)
+      puts("email:  #{email} password: #{password}")
     end
   
     def connect
       ldap = Net::LDAP.new(
-        :host => "35.232.95.82",
+        :host => "eagleun-ldap",
         :port => 389,
         :auth => {
           :method => :simple,
@@ -21,11 +21,11 @@ class Ldap
 
     def connectUser
       ldap = Net::LDAP.new(
-        :host => "35.232.95.82",
+        :host => "eagleun-ldap",
         :port => 389,
         :auth => {
           :method => :simple,
-          :dn => "cn=#{@email},ou=eagle,dc=arqsoft,dc=unal,dc=edu,dc=co",
+          :dn => "cn=#{@email},ou=eagleun,dc=arqsoft,dc=unal,dc=edu,dc=co",
           :password => @password
         }
       )
@@ -36,10 +36,17 @@ class Ldap
     def login 
       if connect()
         if connectUser()
-          puts("User authentication success")
+          user = User.find_by(email: @email)
+            if user!=nil
+              if user.valid?(@password)
+                puts("User authentication success")
+              else
+                puts("Error user authentication base datos")
+              end
+            end
           return 1
         else
-          puts("Error user authentication")
+          puts("Error user authentication ldap")
           return 0
         end
       else
