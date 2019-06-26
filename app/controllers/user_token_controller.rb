@@ -7,9 +7,9 @@ class UserTokenController < Knock::AuthTokenController
 
 	def create
       if check==1
-      	render json: {jwt: auth_token.token}, status: :created
+      	render json: {jwt: auth_token.token, id: entity.id}, status: :created
       else
-      	render json: {jwt: nil}, status: 401
+      	render json: {jwt: nil, id: "0"}, status: 401
       end
 	end
 
