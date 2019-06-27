@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 	#log in
 	get   	'/log/user/edit'		=> 'user#current'
 	get    	'/log/user'				=> 'home#auth'
+	#temp
+	get 	'/users/log_in'			=> 'user_token#showU'
 	# Get log in token from Knock
 	post   	'/log/user/in'			=> 'user_token#create'
 	get    	'/users'				=> 'user#index'
