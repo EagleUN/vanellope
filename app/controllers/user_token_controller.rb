@@ -7,6 +7,7 @@ class UserTokenController < Knock::AuthTokenController
 
 	def create
       if check==1
+      	response.headers['Authorization'] = "Bearer #{auth_token.token}"
       	render json: {jwt: auth_token.token, id: entity.id}, status: 201
       else
       	render json: {jwt: "0", id: "0"}, status: 401
