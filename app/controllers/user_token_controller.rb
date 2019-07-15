@@ -3,17 +3,6 @@ require "#{Rails.root}/lib/ldap"
 class UserTokenController < Knock::AuthTokenController
 	skip_before_action :verify_authenticity_token
 	skip_before_action :authenticate
-	
-	# GET /users/log_in
-	# temporal solo para inicio de sessionchimbo"
-	def showU
-	  if check==1
-      	response.headers['Authorization'] = "Bearer #{auth_token.token}"
-      	render json: {jwt: auth_token.token, id: entity.id, session: true}, status: 201
-      else
-      	render json: {jwt: "0", id: "0", session: false}, status: 401
-      end
-	end
 
 	def create
       if check==1
@@ -22,6 +11,19 @@ class UserTokenController < Knock::AuthTokenController
       else
       	render json: {jwt: "0", id: "0"}, status: 401
       end
+	end
+
+	def entity
+	  user = User.find_by(username: params[:email])
+	  if user!=nil
+	  	params[:email] = user.email
+	  end
+      @entity ||=
+        if entity_class.respond_to? :from_token_request
+          entity_class.from_token_request request
+        else
+          entity_class.find_by email: auth_params[:email]
+        end
 	end
 
 	def check
@@ -35,6 +37,10 @@ class UserTokenController < Knock::AuthTokenController
 	end
 
 	def ldap
+	  user = User.find_by(username: params[:email])
+	  if user!=nil
+	  	params[:email] = user.email
+	  end
       @ldap = Ldap.new(params[:email], params[:password])
     end
 end

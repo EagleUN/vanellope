@@ -8,9 +8,9 @@ class Ldap
   
     def connect
       ldap = Net::LDAP.new(
-        :host => "eagleun-ldap",
-        #:host => "35.206.86.140",
-        :port => 389,
+        #:host => "eagleun-ldap",
+        :host => "35.206.86.140",
+        :port => 55220,
         :auth => {
           :method => :simple,
           :dn => "cn=admin,dc=arqsoft,dc=unal,dc=edu,dc=co",
@@ -22,9 +22,9 @@ class Ldap
 
     def connectUser
       ldap = Net::LDAP.new(
-        :host => "eagleun-ldap",
-        #:host => "35.206.86.140",
-        :port => 389,
+        #:host => "eagleun-ldap",
+        :host => "35.206.86.140",
+        :port => 55220,
         :auth => {
           :method => :simple,
           :dn => "cn=#{@email},ou=eagleun,dc=arqsoft,dc=unal,dc=edu,dc=co",
