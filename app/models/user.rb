@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+	include UuidHelper
+
 	# Necessary to authenticate.
 	has_secure_password
 

@@ -1,17 +1,19 @@
 version: '2'
 
 services:
-  vanellope-db:
-    image: postgres:9.6-alpine
-    container_name: vanellopeContent
+  vanellope-db1:
+    image: mysql:5.7
     ports:
-      - '25432:5432'
+      - "3317:3306"
+    container_name: vanellopeContentDB
     environment:
-      - POSTGRES_USER=usersms
-      - POSTGRES_PASSWORD=yiuPh9eipiu2la9ie8gaifec
-      - POSTGRES_DB=exeggcute
+      MYSQL_ROOT_PASSWORD: yotas
+      MYSQL_USER: eagleun
+      MYSQL_PASSWORD: yotas
+      MYSQL_DATABASE: users
+      MYSQL_HOST: vanellope-db1
     volumes:
-      - 'vanellope_data:/var/lib/postgresql/data'
+      - 'vanellope_data:/var/lib/mysql'
 
   vanellope-ms:
     build: .
@@ -24,7 +26,7 @@ services:
     ports:
       - '3001:3001'
     depends_on:
-      - vanellope-db
+      - vanellope-db1
 
 volumes:
-  vanellope_data:
+  vanellope_data: {}

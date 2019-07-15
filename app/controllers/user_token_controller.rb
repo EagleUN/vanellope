@@ -7,7 +7,7 @@ class UserTokenController < Knock::AuthTokenController
 	# GET /users/log_in
 	# temporal solo para inicio de sessionchimbo"
 	def showU
-		if check==1
+	  if check==1
       	response.headers['Authorization'] = "Bearer #{auth_token.token}"
       	render json: {jwt: auth_token.token, id: entity.id, session: true}, status: 201
       else

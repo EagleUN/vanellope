@@ -9,7 +9,7 @@ class Ldap
     def connect
       ldap = Net::LDAP.new(
         :host => "eagleun-ldap",
-        #:host => "35.232.95.82",
+        #:host => "35.206.86.140",
         :port => 389,
         :auth => {
           :method => :simple,
@@ -23,7 +23,7 @@ class Ldap
     def connectUser
       ldap = Net::LDAP.new(
         :host => "eagleun-ldap",
-        #:host => "35.232.95.82",
+        #:host => "35.206.86.140",
         :port => 389,
         :auth => {
           :method => :simple,

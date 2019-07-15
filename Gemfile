@@ -51,3 +51,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #Gem for connect ldap 
 gem 'net-ldap'
+#Gem yaml database
+gem 'yaml_db'
+# Gem of MySQL
+gem 'mysql2', '~> 0.5.2'
+# gem to uuid
+gem 'uuidtools'

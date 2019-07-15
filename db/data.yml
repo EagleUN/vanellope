@@ -1,0 +1,88 @@
+
+---
+ar_internal_metadata:
+  columns:
+  - key
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - environment
+    - development
+    - '2019-06-23 17:12:08.996149'
+    - '2019-06-23 17:12:08.996149'
+
+---
+users:
+  columns:
+  - id
+  - name
+  - last_name
+  - username
+  - email
+  - password_digest
+  - role
+  - last_login
+  - created_at
+  - updated_at
+  records: 
+  - - 3f6ca1f7-e514-454f-ab3e-48b29c597b06
+    - Valentina
+    - Arevalo
+    - varevalor
+    - varevalor@unal.edu.co
+    - "$2a$12$DgBfpaPZ5IE/vxUQwNIN5O7Vu5EEMgkQuQ0TsJfmm2Wwta6ZJ0AIq"
+    - user
+    - 
+    - '2019-06-27 09:29:03.847126'
+    - '2019-06-27 09:29:03.847126'
+  - - 46562573-0175-4db6-9d80-96e60571a448
+    - Juan Sebastian
+    - Chaves
+    - jschavesr
+    - jschavesr@unal.edu.co
+    - "$2a$12$pkQwTMIdd8QV0DPYINgvUehKArLubPOCCA8AuSwo7F1VAlesSDHGq"
+    - user
+    - 
+    - '2019-06-23 17:12:10.459806'
+    - '2019-06-23 17:12:10.459806'
+  - - 4671ca83-cd2e-400b-af5d-675314da2c39
+    - Laura
+    - Santos
+    - lbsantosg
+    - lbsantosg@unal.edu.co
+    - "$2a$12$UmyytORkljMJaiE.Kmao1OOHovQ8NMnPc8Z18.SdvTjAgmphuqpyi"
+    - user
+    - 
+    - '2019-06-23 17:12:10.748092'
+    - '2019-06-23 17:12:10.748092'
+  - - 5c674394-6803-46f4-86c4-f286669f6d3e
+    - Christian
+    - Sanabria
+    - cdsanabriar
+    - cdsanabriar@unal.edu.co
+    - "$2a$12$sspNvH1mgMGqk4u7sgyM1eVMhQdPlsWtyM6eWL0Sw5ep7.1JNR.EO"
+    - user
+    - 
+    - '2019-06-23 17:12:10.109097'
+    - '2019-06-23 17:12:10.109097'
+  - - 81aac879-ad7d-41fd-8732-204e9bc73c9b
+    - Diego
+    - Niquefa
+    - dsniquefav
+    - dsniquefav@unal.edu.co
+    - "$2a$12$im7Mqw9Zkd1tYmWn2QYW2OEGrDkOsVzjxAeAPFGBJWvX8EPmQ2kfi"
+    - user
+    - 
+    - '2019-06-23 17:12:11.036679'
+    - '2019-06-23 17:12:11.036679'
+  - - 90a5c031-7046-4c11-b7c7-a94d716ad304
+    - Juan Diego
+    - Moreno
+    - judmorenomo
+    - judmorenomo@unal.edu.co
+    - "$2a$12$yeK6LYBZYfKW1E/QhF9xBOBb0pHIzVWNIjS4FBBWXUfThoVgkaiZS"
+    - user
+    - 
+    - '2019-06-23 17:12:11.327855'
+    - '2019-06-23 17:12:11.327855'

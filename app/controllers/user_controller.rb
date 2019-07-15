@@ -26,7 +26,7 @@ class UserController < ApplicationController
 	def create
 		user = User.new(user_params)
 	  	if user.save
-	    	render json: user, status: 201
+	    	render json: {id: user.id, name: user.name, last_name: user.last_name, username: user.username, email: user.email}, status: 201
 	    else
 	    	render json: user.errors , status: 406
 	  	end
@@ -51,14 +51,14 @@ class UserController < ApplicationController
   	# GET /signup/users
 	def show_all
 		user = User.all
-		render json: { total: user.size(), list: user.select(:id, :username, :name, :last_name, :email) }, status: 202
+		render json: { total: user.size(), list: user.select(:uuid, :username, :name, :last_name, :email) }, status: 202
 	end 
 
 	# GET /signup/user_id
 	def show_user_by_id
-		user = User.find_by(id: params[:id])
+		user = User.find_by(uuid: params[:id])
 		if user!=nil
-			render json: {id: user.id, name: user.name, last_name: user.last_name, username: user.username, email: user.email}, status: 200
+			render json: {id: user.uuid, name: user.name, last_name: user.last_name, username: user.username, email: user.email}, status: 200
 		else
 			render json: {msg: 'The user does not exist.' }, status: 406
 		end
